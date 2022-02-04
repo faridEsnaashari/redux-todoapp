@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
         ],
       };
     case REMOVE_ITEM:
-      return state.todos((todo) => todo.id !== action.payload);
+       state.todos.filter((todo) => todo.id !== action.payload);
 
     default:
       return state;

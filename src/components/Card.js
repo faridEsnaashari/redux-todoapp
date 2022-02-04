@@ -13,7 +13,7 @@ const Card = ({ text, id }) => {
         <a onClick={() => remove(id)} className="btn btn-danger">
           Remove
         </a>
-        <span className="mx-5 badge bg-success">{id}</span>
+      
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ const Nav = () => {
             </li>
             <li className="nav-item">
               <a className="nav-link" href="#">
-                Link <span className=" badge bg-success">{Math.random()}</span>
+                Link 
               </a>
             </li>
           </ul>
