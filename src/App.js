@@ -1,20 +1,30 @@
 import Nav from "./components/Nav";
 import React , {useState} from 'react';
-
 import store from "./redux/store";
-import { useSelector } from "react-redux";
+
 import Card from "./components/Card";
+import {addItem, removeItem} from "./redux/actions";
+
 function App() {
   const [text, settext] = useState('');
+  const [reduxState, setReduxState] = useState();
+
+  store.subscribe(() => {
+      setReduxState(store.getState());
+  });
  
-  let test = store.getState()
-  const addTodo = () => {
-    store.dispatch({ type: "ADD_ITEM" , payload : text });
-    
-    
-    settext('')
-    
+  const removeTodo = (id) => {
+    store.dispatch(removeItem(id));
+
+    setReduxState(store.getState());
   };
+
+  const addTodo = () => {
+    store.dispatch(addItem(text));
+
+    settext('')
+  };
+
   return (
     <div>
       <Nav />
@@ -27,9 +37,16 @@ function App() {
         <input value={text} onChange={e => settext(e.target.value)} className="form-control d-inline w-75 mx-auto" />
         </div>
         <hr />
-         {test ? test.todos.map((t , index) => (
-           <Card text={t.text } id={t.id} key={index} />
-         )) : null}
+         {
+           reduxState && reduxState.todos && reduxState.todos.map((t , index) => (
+             <Card 
+               text={t.text } 
+               id={t.id} 
+               key={index} 
+               onRemove={removeTodo}
+             />
+           ))
+          }
       </div>
     </div>
   );
