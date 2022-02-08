@@ -7,8 +7,6 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ITEM:
       return {
-        ...state,
-
         todos: [
           ...state.todos,
           {
@@ -18,7 +16,9 @@ const reducer = (state = initialState, action) => {
         ],
       };
     case REMOVE_ITEM:
-       state.todos.filter((todo) => todo.id !== action.payload);
+          return {
+              todos: state.todos.filter((todo) => todo.id !== action.payload),
+          };
 
     default:
       return state;
